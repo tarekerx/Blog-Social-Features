@@ -1,0 +1,673 @@
+/* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: #E0E0E0; /* Text Light */
+    background: linear-gradient(135deg, #1A1A2E 0%, #2C2C40 100%); /* Primary Dark to Secondary Dark */
+    min-height: 100vh;
+}
+
+/* Container */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Header Navigation */
+.header {
+    background: rgba(26, 26, 46, 0.95); /* Primary Dark with transparency */
+    backdrop-filter: blur(10px);
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    padding: 1rem 0;
+}
+
+.nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.nav-brand {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #00BFFF; /* Electric Blue */
+    text-decoration: none;
+}
+
+.nav-links {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.nav-link {
+    text-decoration: none;
+    color: #A0A0B0; /* Text Muted */
+    padding: 0.5rem 1rem;
+    border-radius: 25px;
+    transition: all 0.3s ease;
+    font-weight: 500;
+}
+
+.nav-link:hover {
+    background: #00BFFF; /* Electric Blue */
+    color: white;
+    transform: translateY(-2px);
+}
+
+.nav-link.primary {
+    background: #00BFFF; /* Electric Blue */
+    color: white;
+}
+
+.nav-link.primary:hover {
+    background: #8A2BE2; /* Electric Purple */
+    transform: translateY(-2px);
+}
+
+/* Main Content */
+.main-content {
+    padding: 2rem 0;
+    min-height: calc(100vh - 80px);
+}
+
+/* Cards */
+.card {
+    background: #2C2C40; /* Secondary Dark */
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    padding: 2rem;
+    margin-bottom: 2rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+}
+
+.card-header {
+    border-bottom: 2px solid #1A1A2E; /* Primary Dark */
+    padding-bottom: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.card-title {
+    color: #E0E0E0; /* Text Light */
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.card-subtitle {
+    color: #A0A0B0; /* Text Muted */
+    font-size: 0.9rem;
+}
+
+/* Forms */
+.form {
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: #E0E0E0; /* Text Light */
+}
+
+.form-input,
+.form-textarea,
+.form-select {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 2px solid #1A1A2E; /* Primary Dark */
+    border-radius: 10px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    background: #2C2C40; /* Secondary Dark */
+    color: #E0E0E0; /* Text Light */
+}
+
+.form-input:focus,
+.form-textarea:focus,
+.form-select:focus {
+    outline: none;
+    border-color: #00BFFF; /* Electric Blue */
+    box-shadow: 0 0 0 3px rgba(0, 191, 255, 0.3);
+}
+
+.form-textarea {
+    min-height: 120px;
+    resize: vertical;
+}
+
+/* Buttons */
+.btn {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 25px;
+    font-size: 1rem;
+    font-weight: 600;
+    text-decoration: none;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin: 0.25rem;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #00BFFF 0%, #8A2BE2 100%); /* Electric Blue to Electric Purple */
+    color: white;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(0, 191, 255, 0.3);
+}
+
+.btn-secondary {
+    background: #1A1A2E; /* Primary Dark */
+    color: #00BFFF; /* Electric Blue */
+    border: 2px solid #00BFFF; /* Electric Blue */
+}
+
+.btn-secondary:hover {
+    background: #00BFFF; /* Electric Blue */
+    color: white;
+    transform: translateY(-2px);
+}
+
+.btn-success {
+    background: #39FF14; /* Electric Green */
+    color: #1A1A2E; /* Primary Dark */
+}
+
+.btn-success:hover {
+    background: #2ECC71; /* Slightly darker green */
+    transform: translateY(-2px);
+}
+
+.btn-danger {
+    background: #FF6347; /* Error Red */
+    color: white;
+}
+
+.btn-danger:hover {
+    background: #E74C3C; /* Slightly darker red */
+    transform: translateY(-2px);
+}
+
+.btn-small {
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+}
+
+/* Post Styles */
+.post {
+    background: #2C2C40; /* Secondary Dark */
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    margin-bottom: 2rem;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.post:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+}
+
+.post-header {
+    padding: 1.5rem;
+    border-bottom: 1px solid #1A1A2E; /* Primary Dark */
+}
+
+.post-title {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: #E0E0E0; /* Text Light */
+    text-decoration: none;
+    margin-bottom: 0.5rem;
+    display: block;
+}
+
+.post-title:hover {
+    color: #00BFFF; /* Electric Blue */
+}
+
+.post-meta {
+    color: #A0A0B0; /* Text Muted */
+    font-size: 0.9rem;
+}
+
+.post-content {
+    padding: 1.5rem;
+    color: #E0E0E0; /* Text Light */
+    line-height: 1.7;
+}
+
+.post-actions {
+    padding: 1rem 1.5rem;
+    background: #1A1A2E; /* Primary Dark */
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+/* Comments */
+.comment {
+    background: #1A1A2E; /* Primary Dark */
+    border-radius: 10px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border-left: 4px solid #00BFFF; /* Electric Blue */
+}
+
+.comment-author {
+    font-weight: 600;
+    color: #E0E0E0; /* Text Light */
+    margin-bottom: 0.5rem;
+}
+
+.comment-content {
+    color: #A0A0B0; /* Text Muted */
+    margin-bottom: 0.5rem;
+}
+
+.comment-meta {
+    font-size: 0.8rem;
+    color: #A0A0B0; /* Text Muted */
+}
+
+.comment-actions {
+    margin-top: 0.5rem;
+    display: flex;
+    gap: 0.5rem;
+}
+
+/* Search */
+.search-form {
+    background: #2C2C40; /* Secondary Dark */
+    border-radius: 25px;
+    padding: 0.5rem;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    display: flex;
+    margin-bottom: 2rem;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.search-input {
+    flex: 1;
+    border: none;
+    padding: 0.75rem 1rem;
+    border-radius: 20px;
+    font-size: 1rem;
+    outline: none;
+    background: #2C2C40; /* Secondary Dark */
+    color: #E0E0E0; /* Text Light */
+}
+
+.search-btn {
+    background: #00BFFF; /* Electric Blue */
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.search-btn:hover {
+    background: #8A2BE2; /* Electric Purple */
+}
+
+/* Pagination */
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    margin: 2rem 0;
+    flex-wrap: wrap;
+}
+
+.pagination-link {
+    padding: 0.5rem 1rem;
+    background: #2C2C40; /* Secondary Dark */
+    color: #00BFFF; /* Electric Blue */
+    text-decoration: none;
+    border-radius: 10px;
+    border: 2px solid #00BFFF; /* Electric Blue */
+    transition: all 0.3s ease;
+}
+
+.pagination-link:hover {
+    background: #00BFFF; /* Electric Blue */
+    color: white;
+}
+
+.pagination-info {
+    color: #E0E0E0; /* Text Light */
+    font-weight: 600;
+}
+
+/* Profile */
+.profile-header {
+    text-align: center;
+    padding: 2rem;
+    background: linear-gradient(135deg, #00BFFF 0%, #8A2BE2 100%); /* Electric Blue to Electric Purple */
+    color: white;
+    border-radius: 15px;
+    margin-bottom: 2rem;
+}
+
+.profile-avatar {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background: rgba(0, 191, 255, 0.2); /* Electric Blue with transparency */
+    margin: 0 auto 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+}
+
+.profile-name {
+    font-size: 2rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.profile-bio {
+    opacity: 0.9;
+    font-size: 1.1rem;
+}
+
+/* Friend Requests */
+.friend-request {
+    background: #2C2C40; /* Secondary Dark */
+    border-radius: 10px;
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.friend-request-info {
+    flex: 1;
+    color: #E0E0E0; /* Text Light */
+}
+
+.friend-request-actions {
+    display: flex;
+    gap: 0.5rem;
+}
+
+/* People List */
+.people-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.person-card {
+    background: #2C2C40; /* Secondary Dark */
+    border-radius: 15px;
+    padding: 2rem;
+    text-align: center;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+}
+
+.person-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+}
+
+.person-avatar {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #00BFFF 0%, #8A2BE2 100%); /* Electric Blue to Electric Purple */
+    margin: 0 auto 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.person-name {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: #E0E0E0; /* Text Light */
+}
+
+/* Messages/Alerts */
+.alert {
+    padding: 1rem 1.5rem;
+    border-radius: 10px;
+    margin-bottom: 1rem;
+    font-weight: 500;
+}
+
+.alert-success {
+    background: #39FF14; /* Electric Green */
+    color: #1A1A2E; /* Primary Dark */
+    border: 1px solid #39FF14;
+}
+
+.alert-error {
+    background: #FF6347; /* Error Red */
+    color: white;
+    border: 1px solid #FF6347;
+}
+
+.alert-info {
+    background: #00BFFF; /* Electric Blue */
+    color: white;
+    border: 1px solid #00BFFF;
+}
+
+.alert-warning {
+    background: #8A2BE2; /* Electric Purple */
+    color: white;
+    border: 1px solid #8A2BE2;
+}
+
+/* Additional improvements */
+.text-center {
+    text-align: center;
+}
+
+.text-success {
+    color: #39FF14; /* Electric Green */
+}
+
+.text-danger {
+    color: #FF6347; /* Error Red */
+}
+
+.post-stats {
+    padding: 0.5rem 1.5rem;
+    background: #1A1A2E; /* Primary Dark */
+    color: #A0A0B0; /* Text Muted */
+    font-size: 0.85rem;
+    border-top: 1px solid #2C2C40; /* Secondary Dark */
+}
+
+.person-bio {
+    color: #A0A0B0; /* Text Muted */
+    font-size: 0.9rem;
+    margin-top: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.person-actions {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+
+
+
+/* Delete Confirmation Styles */
+.delete-confirmation {
+    background: #2C2C40; /* Secondary Dark */
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    padding: 2rem;
+    margin: 2rem auto;
+    max-width: 600px;
+    text-align: center;
+}
+
+.delete-confirmation h2 {
+    color: #FF6347; /* Error Red */
+    font-size: 1.8rem;
+    font-weight: 600;
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.delete-post-preview {
+    background: #1A1A2E; /* Primary Dark */
+    border-radius: 10px;
+    padding: 1.5rem;
+    margin: 2rem 0;
+    border-left: 4px solid #FF6347; /* Error Red */
+    text-align: left;
+}
+
+.delete-post-preview strong {
+    color: #E0E0E0; /* Text Light */
+    font-weight: 600;
+    display: inline-block;
+    margin-bottom: 0.5rem;
+}
+
+.delete-post-preview .post-title-preview {
+    color: #00BFFF; /* Electric Blue */
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+}
+
+.delete-post-preview .post-content-preview {
+    color: #A0A0B0; /* Text Muted */
+    line-height: 1.6;
+    margin-bottom: 0;
+}
+
+.delete-actions {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 2rem;
+    flex-wrap: wrap;
+}
+
+.delete-actions .btn-danger {
+    background: #FF6347; /* Error Red */
+    color: white;
+    padding: 0.75rem 2rem;
+    font-weight: 600;
+}
+
+.delete-actions .btn-danger:hover {
+    background: #E74C3C; /* Slightly darker red */
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(255, 99, 71, 0.3);
+}
+
+.delete-actions .btn-secondary {
+    background: #1A1A2E; /* Primary Dark */
+    color: #00BFFF; /* Electric Blue */
+    border: 2px solid #00BFFF; /* Electric Blue */
+    padding: 0.75rem 2rem;
+    font-weight: 600;
+}
+
+.delete-actions .btn-secondary:hover {
+    background: #00BFFF; /* Electric Blue */
+    color: white;
+    transform: translateY(-2px);
+}
+
+/* Warning message styling */
+.warning-message {
+    background: rgba(255, 99, 71, 0.1); /* Error Red with transparency */
+    border: 1px solid #FF6347; /* Error Red */
+    border-radius: 10px;
+    padding: 1rem;
+    margin: 1rem 0;
+    color: #FF6347; /* Error Red */
+    font-weight: 500;
+    text-align: center;
+}
+
+.warning-message::before {
+    content: "⚠️ ";
+    font-size: 1.2rem;
+    margin-right: 0.5rem;
+}
+
+.avatar-modal {
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.8);
+}
+
+.avatar-modal img.modal-content {
+  display: block;
+  margin: 50px auto;
+  max-width: 90%;
+  max-height: 80%;
+  border-radius: 10px;
+}
+
+.avatar-modal .close {
+  position: absolute;
+  top: 20px;
+  right: 35px;
+  color: white;
+  font-size: 40px;
+  font-weight: bold;
+  cursor: pointer;
+}

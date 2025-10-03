@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block body %}
+<div class="card">
+  <div class="card-header">
+    <h1 class="card-title">Add Post</h1>
+  </div>
+  
+  <form method="post" class="form">
+    {% csrf_token %}
+    
+    <div class="form-group">
+      <label for="title" class="form-label">Title:</label>
+      <input type="text" id="title" name="title" required class="form-input">
+    </div>
+
+    <div class="form-group">
+      <label for="content" class="form-label">Content:</label>
+      <textarea id="content" name="content" required class="form-textarea"></textarea>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Add Post</button>
+    <a href="{% url 'index' %}" class="btn btn-secondary">Cancel</a>
+  </form>
+</div>
+{% endblock body %}
+

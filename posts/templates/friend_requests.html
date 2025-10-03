@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block body %}
+<div class="card">
+  <div class="card-header">
+    <h1 class="card-title">Friend Requests</h1>
+  </div>
+  
+  {% for friend_request in friend_requests %}
+    <div class="friend-request">
+      <div class="friend-request-info">
+        <p><strong>{{ friend_request.sender.first_name }} {{ friend_request.sender.last_name }}</strong> (@{{ friend_request.sender.username }}) sent you a friend request</p>
+        <small>{{ friend_request.created_at|date:"M d, Y H:i" }}</small>
+      </div>
+      
+      <div class="friend-request-actions">
+        <form action="{% url 'accept_friend_request' friend_request.id %}" method="post" style="display: inline;">
+          {% csrf_token %}
+          <button type="submit" class="btn btn-success">Accept</button>
+        </form> 
+
+        <form action="{% url 'decline_friend_request' friend_request.id %}" method="post" style="display: inline;">
+          {% csrf_token %}
+          <button type="submit" class="btn btn-danger">Decline</button>
+        </form>
+        
+        <a href="{% url 'show_profile' friend_request.sender.id %}" class="btn btn-secondary btn-small">View Profile</a>
+      </div>
+    </div>
+  {% empty %}
+    <div class="text-center">
+      <p>No friend requests.</p>
+      <a href="{% url 'show_people' %}" class="btn btn-primary">Browse People</a>
+    </div>
+  {% endfor %}
+</div>
+{% endblock %}
+

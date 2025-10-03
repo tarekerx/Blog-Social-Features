@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block body %}
+<div class="card">
+  <div class="card-header">
+    <h1 class="card-title">People</h1>
+  </div>
+  
+  <div class="people-grid">
+    {% for person in users %}
+      <div class="person-card">
+        {% if person.avatar %}
+        <div>
+          <img src="{{ person.avatar.url }}" alt="{{ person.username }}'s avatar" style="width:100px; height:100px; border-radius:50%; object-fit:cover; border:2px solid #ccc; box-shadow:0 2px 6px rgba(0,0,0,0.2);">
+
+          {{ person.first_name.0|upper }}{{ person.last_name.0|upper }}
+        </div>
+        
+        {% else %}
+        <div class="person-avatar">
+          {{ person.first_name.0|upper }}{{ person.last_name.0|upper }}
+        </div>
+        {% endif %}
+        
+        <div class="person-name">{{ person.first_name }} {{ person.last_name }}</div>
+        <p>@{{ person.username }}</p>
+        {% if person.bio %}
+          <p class="person-bio">{{ person.bio|truncatewords:10 }}</p>
+        {% endif %}
+        <div class="person-actions">
+          <a href="{% url 'show_profile' person.id %}" class="btn btn-primary btn-small">View Profile</a>
+          {% if person != request.user %}
+            <a href="{% url 'people_posts' person.id %}" class="btn btn-secondary btn-small">View Posts</a>
+          {% endif %}
+        </div>
+      </div>
+    {% empty %}
+      <div class="text-center">
+        <p>No people found.</p>
+      </div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock body %}
+

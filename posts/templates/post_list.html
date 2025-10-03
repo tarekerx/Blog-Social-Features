@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block body %}
+<div class="card">
+  <div class="card-header">
+    <h1 class="card-title">Posts</h1>
+  </div>
+  
+  {% for post in posts %}
+    <div class="post">
+      <div class="post-header">
+        <h2 class="post-title">
+          <a href="{% url 'view_post' post.id %}">{{ post.title|title }}</a>
+        </h2>
+        <div class="post-meta">
+          By {{ post.author.username }} • {{ post.created_at|date:"M d, Y" }}
+        </div>
+      </div>
+      
+      <div class="post-content">
+        <p>{{ post.content|truncatewords:20 }}</p>
+      </div>
+      
+      <div class="post-actions">
+        <a href="{% url 'view_post' post.id %}" class="btn btn-primary btn-small">Read More</a>
+        {% if post.author == request.user %}
+          <a href="{% url 'edit_post' post.id %}" class="btn btn-secondary btn-small">Edit</a>
+          <a href="{% url 'delete_post' post.id %}" class="btn btn-danger btn-small">Delete</a>
+        {% endif %}
+      </div>
+      
+      <div class="post-stats">
+        <small>{{ post.likes.count }} likes • {{ post.comments.count }} comments</small>
+      </div>
+    </div>
+  {% empty %}
+    <div class="text-center">
+      <h1>No posts available</h1>
+    </div>
+  {% endfor %}
+</div>
+{% endblock body %}
+

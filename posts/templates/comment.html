@@ -1,0 +1,25 @@
+{% if edit_comment == comment %}
+  <div class="comment">
+    <form action="{% url 'edit_comment' comment.id %}" method="post" class="form">
+      {% csrf_token %}
+      <div class="form-group">
+        <input type="text" name="comment" value="{{comment.content}}" class="form-input">
+      </div>
+      <button type="submit" class="btn btn-success btn-small">Update</button>
+      <a href="{% url 'view_post' comment.post.id %}" class="btn btn-secondary btn-small">Cancel</a>
+    </form>
+  </div>
+{% else %}
+  <div class="comment">
+    <div class="comment-content">
+      <p>{{comment.content}} - {{comment.author.username}} on {{comment.created_at|date:"M d, Y H:i"}}</p>
+    </div>
+    {% if request.user == comment.author %}
+      <div class="comment-actions">
+        <a href="{% url 'edit_comment' comment.id %}" class="btn btn-secondary btn-small">Edit Comment</a>
+        <a href="{% url 'delete_comment' comment.id %}" class="btn btn-danger btn-small">Delete Comment</a>
+      </div>
+    {% endif %}
+  </div>
+{% endif %}
+

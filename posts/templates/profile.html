@@ -1,0 +1,177 @@
+{% extends "base.html" %}
+
+{% block body %}
+
+<!-- PROFILE HEADER -->
+<div class="profile-header">
+  <div class="profile-avatar">
+    {% if user.avatar %}
+      <!-- Display uploaded avatar -->
+       <div class = "profile-avatar">
+      <img id="profileAvatar" src="{{ user.avatar.url }}" alt="{{ user.username }}" 
+           style="width:100px; height:100px; border-radius:50%; object-fit:cover; border:2px solid #ccc; box-shadow:0 2px 6px rgba(0,0,0,0.2);">
+    {% else %}
+      <!-- Fallback to initials -->
+      {{ user.first_name.0|upper }}{{ user.last_name.0|upper }}
+    {% endif %}
+    </div>
+  </div>
+  <h1 class="profile-name">{{ user.first_name }} {{ user.last_name }}</h1>
+  <p class="profile-bio">@{{ user.username }}</p>
+  {% if user.bio %}
+    <p class="profile-bio">{{ user.bio }}</p>
+  {% endif %}
+</div>
+
+<!-- EDIT PROFILE FORM -->
+<div class="card">
+  <div class="card-header">
+    <h2 class="card-title">Edit Profile</h2>
+  </div>
+
+  <!-- enctype required for file upload -->
+  <form method="post" enctype="multipart/form-data" class="form">
+    {% csrf_token %}
+
+    <!-- Username -->
+    <div class="form-group">
+      <label for="username" class="form-label">Username:</label>
+      <input type="text" id="username" name="username" value="{{ user.username }}" class="form-input">
+      {% for error in form.username.errors %}
+        <div class="text-danger">{{ error }}</div>
+      {% endfor %}
+    </div>
+
+    <!-- Email -->
+    <div class="form-group">
+      <label for="email" class="form-label">Email:</label>
+      <input type="email" id="email" name="email" value="{{ user.email }}" class="form-input">
+      {% for error in form.email.errors %}
+        <div class="text-danger">{{ error }}</div>
+      {% endfor %}
+    </div>
+
+    <!-- First Name -->
+    <div class="form-group">
+      <label for="first_name" class="form-label">First Name:</label>
+      <input type="text" id="first_name" name="first_name" value="{{ user.first_name }}" class="form-input">
+      {% for error in form.first_name.errors %}
+        <div class="text-danger">{{ error }}</div>
+      {% endfor %}
+    </div>
+
+    <!-- Last Name -->
+    <div class="form-group">
+      <label for="last_name" class="form-label">Last Name:</label>
+      <input type="text" id="last_name" name="last_name" value="{{ user.last_name }}" class="form-input">
+      {% for error in form.last_name.errors %}
+        <div class="text-danger">{{ error }}</div>
+      {% endfor %}
+    </div>
+
+    <!-- Bio -->
+    <div class="form-group">
+      <label for="bio" class="form-label">Bio:</label>
+      <textarea id="bio" name="bio" class="form-textarea">{{ user.bio }}</textarea>
+      {% for error in form.bio.errors %}
+        <div class="text-danger">{{ error }}</div>
+      {% endfor %}
+    </div>
+
+    <!-- Phone Number -->
+    <div class="form-group">
+      <label for="phone_number" class="form-label">Phone Number:</label>
+      <input type="text" id="phone_number" name="phone_number" value="{{ user.phone_number }}" class="form-input">
+      {% for error in form.phone_number.errors %}
+        <div class="text-danger">{{ error }}</div>
+      {% endfor %}
+    </div>
+
+    <!-- Avatar Upload -->
+    <div class="form-group">
+      <label for="avatar" class="form-label">Avatar:</label>
+      {% if user.avatar %}
+        <!-- Show current avatar preview -->
+        <img src="{{ user.avatar.url }}" alt="Current avatar" 
+             style="width:100px; height:100px; border-radius:50%; display:block; margin-bottom:10px;">
+      {% endif %}
+      <input type="file" id="avatar" name="avatar" class="form-input">
+      {% for error in form.avatar.errors %}
+        <div class="text-danger">{{ error }}</div>
+      {% endfor %}
+    </div>
+
+    <!-- Password Change -->
+    <div class="form-group">
+      <label for="password1" class="form-label">New Password (leave blank to keep current):</label>
+      <input type="password" id="password1" name="password1" class="form-input">
+      {% for error in form.password1.errors %}
+        <div class="text-danger">{{ error }}</div>
+      {% endfor %}
+    </div>
+
+    <div class="form-group">
+      <label for="password2" class="form-label">Confirm New Password:</label>
+      <input type="password" id="password2" name="password2" class="form-input">
+      {% for error in form.password2.errors %}
+        <div class="text-danger">{{ error }}</div>
+      {% endfor %}
+    </div>
+
+    <!-- Non-field errors -->
+    {% if form.non_field_errors %}
+      <div class="alert alert-danger">
+        {% for error in form.non_field_errors %}
+          {{ error }}
+        {% endfor %}
+      </div>
+    {% endif %}
+
+    <button type="submit" class="btn btn-primary">Update Profile</button>
+  </form>
+</div>
+
+<!-- QUICK ACTIONS -->
+<div class="card">
+  <div class="card-header">
+    <h2 class="card-title">Quick Actions</h2>
+  </div>
+  <div class="post-actions">
+    <a href="{% url 'add_post' %}" class="btn btn-primary">Create New Post</a>
+    <a href="{% url 'people_posts' user.id %}" class="btn btn-secondary">View My Posts</a>
+    <a href="{% url 'liked_posts' %}" class="btn btn-secondary">My Liked Posts</a>
+    <a href="{% url 'favourite_posts' %}" class="btn btn-secondary">My Favourites</a>
+    <a href="{% url 'show_people' %}" class="btn btn-secondary">Browse People</a>
+    <a href="{% url 'friend_requests' %}" class="btn btn-secondary">Friend Requests</a>
+    <a href="{% url 'friends_list' %}" class="btn btn-secondary">My Friends</a>
+    <a href="{% url 'ask_for_admin' %}" class="btn btn-warning">Request Admin</a>
+  </div>
+</div>
+<div id = "avatarModal" class = "avatar-modal" style="display:none;">
+  <span class = "close">&times;</span>
+  <img class = "modal-content" id ="avatarModalImg">
+  <div id ="caption"></div>
+</div>
+
+<script>
+  var modal = document.getElementById("avatarModal");
+  var img = document.getElementById("profileAvatar");
+  var modalImg = document.getElementById("avatarModalImg");
+  var caption = document.getElementById("caption");
+  var span = document.getElementsByClassName("close")[0];
+
+  img.onclick = function(){
+    modal.style.display = "block";
+    modalImg.src = this.src;
+    caption.innerHTML = this.alt;
+  }
+  span.onclick = function(){
+    modal.style.display = "none"
+  }
+  modal.onclick = function(e){
+    if(e.target == modal){
+      modal.style.display = "none";
+    }
+  }
+</script>
+{% endblock body %}

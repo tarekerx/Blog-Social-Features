@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block body %}
+<div class="search-form">
+  <form action="{% url 'search' %}" method="post">
+    {% csrf_token %}
+    <input type="text" name="q" placeholder="Search..." class="search-input">
+    <button type="submit" class="search-btn">Search</button>
+  </form>
+</div>
+
+{% for post in page_obj %}
+  <div class="post">
+    <div class="post-header">
+      <h1 class="post-title"><a href="{% url 'view_post' post.id %}">{{ post.title|title }}</a></h1>
+      <div class="post-meta">
+        By {{ post.author.username }} • {{ post.created_at|date:"M d, Y" }}
+      </div>
+    </div>
+    <div class="post-content">
+      <h3>{{ post.content|truncatewords:5 }}</h3>
+    </div>
+    <div class="post-actions">
+      <a href="{% url 'view_post' post.id %}" class="btn btn-primary btn-small">Read More</a>
+      {% if post.author == request.user %}
+        <a href="{% url 'edit_post' post.id %}" class="btn btn-secondary btn-small">Edit</a>
+        <a href="{% url 'delete_post' post.id %}" class="btn btn-danger btn-small">Delete</a>
+      {% endif %}
+    </div>
+  </div>
+{% empty %}
+  <div class="card text-center">
+    <h1>No posts available</h1>
+  </div>
+{% endfor %}
+
+<div class="pagination">
+  {% if page_obj.has_previous %}
+    <a href="?page={{page_obj.previous_page_number}}" class="pagination-link">previous page</a>
+  {% endif %}
+
+  <span class="pagination-info">Page {{page_obj.number}} of {{page_obj.paginator.num_pages}}</span>
+
+  {% if page_obj.has_next %}
+    <a href="?page={{page_obj.next_page_number}}" class="pagination-link">Next page</a>
+  {% endif %}
+</div>
+{% endblock body %}
+
